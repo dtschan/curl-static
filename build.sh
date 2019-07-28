@@ -5,7 +5,7 @@ apk add gcc make musl-dev openssl-dev
 wget "https://curl.haxx.se/download/$(wget https://curl.haxx.se/download/ -q -O- | grep -o 'curl-.*\.tar\.xz"' | sort -r | head -n1 | sed 's/.$//')"
 tar xvfJ curl-*.tar.xz 
 cd curl-*
-./configure ./configure --disable-shared --without-ca-fallback --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt --with-ca-path=/etc/ssl/certs/
+./configure --disable-shared --without-ca-fallback --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt --with-ca-path=/etc/ssl/certs/
 make curl_LDFLAGS=-all-static 
 make install
 cp /usr/local/bin/curl /out
