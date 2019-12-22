@@ -19,7 +19,7 @@ conditional_fetch () {
   local OUTPUT_PATH=\$2
   if [ -e \${OUTPUT_PATH} ]; then
     echo "Found existing \${OUTPUT_PATH}; reusing..."
-  else 
+  else
     echo "Fetching \${URL} to \${OUTPUT_PATH}..."
     wget "\${URL}" -O "\${OUTPUT_PATH}"
   fi
@@ -53,12 +53,12 @@ tar xfJ \${TARBALL_PATH}
 cd curl-*
 
 echo "***Installing build dependencies..."
-apk add gcc make musl-dev openssl-dev
+apk add gcc make musl-dev openssl-dev openssl-libs-static file
 
 echo "***configuring..."
 ./configure --disable-shared --with-ca-fallback
 echo "making..."
-make curl_LDFLAGS=-all-static 
+make curl_LDFLAGS=-all-static
 
 echo "***Finishing up..."
 cp src/curl \${FINAL_BIN_PATH}
