@@ -53,10 +53,26 @@ tar xfJ \${TARBALL_PATH}
 cd curl-*
 
 echo "***Installing build dependencies..."
-apk add gcc make musl-dev openssl-dev openssl-libs-static file
+apk add gcc make musl-dev openssl-dev openssl-libs-static file \
+        nghttp2-static nghttp2-dev \
+        brotli-static brotli-dev \
+        zlib-static zlib-dev \
+        groff
+
+# Fix for libbrotlidec:
+cd /usr/lib
+ar -M <<AREOF
+create libbrotlidec.a
+addlib libbrotlidec-static.a
+addlib libbrotlicommon-static.a
+save
+end
+AREOF
+
+cd /tmp/build/curl-*
 
 echo "***configuring..."
-./configure --disable-shared --with-ca-fallback
+./configure --enable-manual --disable-shared --with-ca-fallback
 echo "making..."
 make curl_LDFLAGS=-all-static
 
