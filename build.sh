@@ -8,7 +8,7 @@ GPG_KEY_URL="https://daniel.haxx.se/mykey.asc"
 GPG_KEY_PATH="/out/curl-gpg.pub"
 #Do not escape the above variables in script below
 #change last argument to -xeus for help with debugging
-cat <<EOF | docker run -i --rm -v "$PWD":/out --tmpfs /tmp/build:exec -w /tmp/build alpine /bin/sh -eus
+cat <<EOF | docker run --network host -i --rm -v "$PWD":/out --tmpfs /tmp/build:exec -w /tmp/build alpine /bin/sh -eus
 
 #Print failure message we exit unexpectedly
 trap 'RC="\$?"; echo "***FAILED! RC=\${RC}"; exit \${RC}' EXIT
