@@ -56,7 +56,7 @@ echo "***Installing build dependencies..."
 apk add gcc make musl-dev openssl-dev openssl-libs-static file
 
 echo "***configuring..."
-./configure --disable-shared --with-ca-fallback
+./configure --disable-shared --with-ca-fallback --with-openssl
 echo "making..."
 make curl_LDFLAGS=-all-static
 
